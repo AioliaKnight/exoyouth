@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ExoYouth - 專業級外泌體保養品，採用先進科研技術，帶來全面肌膚呵護。">
+  <meta name="keywords" content="ExoYouth, 外泌體, 保養品, 科研, 肌膚呵護">
+  <meta name="author" content="ExoYouth">
+  <title>ExoYouth - 專業級外泌體保養品</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/vite.svg" type="image/svg+xml">
+
+  <!-- Preload critical assets -->
+  <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=800" as="image" fetchpriority="high">
+
+  <!-- Critical CSS -->
+  <style>
+    @font-face {
+      font-family: 'Inter var';
+      font-weight: 100 900;
+      font-display: swap;
+      font-style: normal;
+      src: url("/fonts/inter-var.woff2") format("woff2");
+    }
+
+    /* Loading Spinner */
+    .loading-spinner {
+      width: 32px;
+      height: 32px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid #e11d48;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Page Loader */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .page-loader.loaded {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Prevent FOUC */
+    #root:not(:empty) + .page-loader {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Spinner -->
+  <div class="page-loader">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Root Element -->
+  <div id="root"></div>
+
+  <!-- Main Script -->
+  <script type="module" src="/src/main.tsx"></script>
+
+  <!-- Handle Loading State -->
+  <script>
+    window.addEventListener('load', () => {
+      const loader = document.querySelector('.page-loader');
+      if (loader) {
+        // Ensure smooth transition after page load
+        setTimeout(() => loader.classList.add('loaded'), 500);
+        loader.addEventListener('transitionend', () => loader.remove());
+      }
+    });
+  </script>
+</body>
+</html>

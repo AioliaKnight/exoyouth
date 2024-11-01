@@ -1,0 +1,244 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+@layer base {
+  html {
+    @apply scroll-smooth antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-white text-gray-900 leading-relaxed;
+  }
+
+  ::selection {
+    @apply bg-rose-500/20 text-rose-900;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-rose-500 ring-offset-2;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Animation keyframes */
+@layer utilities {
+  @keyframes float {
+    0%, 100% { 
+      transform: translateY(0); 
+    }
+    50% { 
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes breathe {
+    0%, 100% { 
+      opacity: 0.9;
+      transform: scale(1);
+    }
+    50% { 
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+    80% {
+      opacity: 1;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+}
+
+/* Animation classes */
+@layer components {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .animate-bounce-in {
+    animation: bounceIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .animate-gradient {
+    animation: gradientFlow 6s ease infinite;
+    background-size: 200% 200%;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite linear;
+    background: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-size: 1000px 100%;
+  }
+}
+
+/* Animation delays */
+@layer utilities {
+  .delay-0 { animation-delay: 0ms; }
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+}
+
+/* Component styles */
+@layer components {
+  /* Glass morphism */
+  .glass-morphism {
+    @apply backdrop-blur-md bg-white/70 border border-white/20;
+  }
+
+  /* Glass card */
+  .glass-card {
+    @apply glass-morphism shadow-lg hover:shadow-xl transition-shadow duration-300;
+  }
+
+  /* Brand gradient */
+  .bg-gradient-brand {
+    @apply bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600;
+  }
+
+  /* Base button */
+  .btn-base {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full
+           font-medium transition-all duration-300 
+           hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply btn-base bg-gradient-to-r from-rose-600 to-rose-500
+           text-white shadow-lg hover:shadow-xl
+           hover:from-rose-700 hover:to-rose-600;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply btn-base border-2 border-rose-200 text-rose-600
+           hover:bg-rose-50 hover:border-rose-300;
+  }
+
+  /* Card base */
+  .card-base {
+    @apply bg-white rounded-2xl shadow-lg overflow-hidden
+           transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .glass-morphism {
+    @apply bg-gray-900/70 border-gray-700/20;
+  }
+
+  ::selection {
+    @apply bg-rose-500/40 text-rose-200;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
